@@ -1,0 +1,4 @@
+---
+- name: Comprobar que el rol PostgreSQL se ejecuta
+  ansible.builtin.debug:
+    msg: "Rol PostgreSQL preparado correctamente"

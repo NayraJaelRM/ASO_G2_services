@@ -1,0 +1,7 @@
+---
+- name: Configuracion del servidor openSUSE
+  hosts: servidores
+  become: true
+
+  roles:
+    - postgresql

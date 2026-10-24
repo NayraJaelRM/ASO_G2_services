@@ -1,0 +1,18 @@
+# Archivos temporales Ansible
+*.retry
+*.log
+
+# Contraseñas y secretos
+.env
+.vault_pass
+vault_password.txt
+
+# Claves privadas SSH
+id_rsa
+id_ed25519
+*.pem
+*.key
+
+# Archivos temporales
+*.swp
+*~
