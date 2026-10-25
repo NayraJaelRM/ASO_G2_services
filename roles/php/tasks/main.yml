@@ -1,0 +1,16 @@
+---
+- name: Instalar PHP y modulo de Apache
+  community.general.zypper:
+    name:
+      - php8
+      - php8-cli
+      - apache2-mod_php8
+      - php8-mysql
+      - php8-curl
+    state: present
+
+- name: Habilitar modulo PHP en Apache
+  ansible.builtin.command: /usr/sbin/a2enmod php8
+  register: php_modulo
+  changed_when: "'already' not in php_modulo.stdout.lower()"
+  notify: Reiniciar Apache

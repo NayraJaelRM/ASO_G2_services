@@ -1,0 +1,13 @@
+---
+- name: Instalar servidor MariaDB
+  community.general.zypper:
+    name:
+      - mariadb-server
+      - python313-PyMySQL
+    state: present
+
+- name: Iniciar y habilitar MariaDB
+  ansible.builtin.systemd:
+    name: mariadb
+    state: started
+    enabled: true

@@ -1,0 +1,12 @@
+---
+- name: Instalar phpMyAdmin
+  community.general.zypper:
+    name:
+      - phpMyAdmin
+      - phpMyAdmin-apache
+    state: present
+
+- name: Reiniciar Apache para aplicar phpMyAdmin
+  ansible.builtin.systemd:
+    name: apache2
+    state: restarted

@@ -1,0 +1,25 @@
+---
+- name: Instalar Apache
+  community.general.zypper:
+    name: apache2
+    state: present
+
+- name: Iniciar y habilitar Apache
+  ansible.builtin.systemd:
+    name: apache2
+    state: started
+    enabled: true
+- name: Crear pagina web de prueba
+  ansible.builtin.copy:
+    content: "Apache funcionando correctamente - Proyecto ASO"
+    dest: /srv/www/htdocs/index.html
+    owner: root
+    group: root
+    mode: "0644"
+- name: Permitir HTTP en el firewall
+  ansible.posix.firewalld:
+    service: http
+    zone: public
+    permanent: true
+    immediate: true
+    state: enabled
