@@ -1,0 +1,28 @@
+---
+- name: Instalar servidor MariaDB
+  community.general.zypper:
+    name:
+      - mariadb-server
+      - python313-PyMySQL
+    state: present
+
+- name: Iniciar y habilitar MariaDB
+  ansible.builtin.systemd:
+    name: mariadb
+    state: started
+    enabled: true
+- name: Crear base de datos de prueba ASO
+  community.mysql.mysql_db:
+    name: aso_web_db
+    state: present
+    login_unix_socket: /run/mysql/mysql.sock
+
+- name: Crear usuario de prueba para MariaDB
+  community.mysql.mysql_user:
+    name: aso_web_user
+    password: "{{ mysql_aso_password }}"
+    host: localhost
+    priv: "aso_web_db.*:ALL"
+    state: present
+    login_unix_socket: /run/mysql/mysql.sock
+  no_log: true
